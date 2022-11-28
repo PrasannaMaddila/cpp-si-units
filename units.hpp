@@ -18,7 +18,7 @@ struct UnitTuple{
     int pow_candela; 
     int pow_kg; 
 
-    void print(std::ostream& out){
+    void print(std::ostream& out) const {
         out << "< " << pow_meter << ", " << pow_second 
             << ", " << pow_mole  << ", " << pow_ampere
             << ", " << pow_temperature << ", " << pow_candela
@@ -93,7 +93,7 @@ class Unit {
 }; 
 
 template<UnitTuple utup>
-std::ostream& operator<<(std::ostream& out, Unit<utup>& unit){
+std::ostream& operator<<(std::ostream& out, Unit<utup>& unit) {
     unit.print(out); 
     return out;
 }

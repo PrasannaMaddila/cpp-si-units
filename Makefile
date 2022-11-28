@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-std=c++20 -fsanitize=address -fpermissive
+FLAGS=-std=c++20 -fsanitize=address #-fpermissive
 GTEST=-lgtest
 UNIT=unit
 UNITS=units
