@@ -9,7 +9,7 @@ units: $(TESTFILE).cpp $(UNITS).hpp
 	@clear
 	$(CC) $(TESTFILE).cpp $(GTEST) $(FLAGS) -o $(TESTFILE).o
 
-run: $(TESTFILE).o 
+run: units
 	@clear
 	@echo "Running test suite for units.hpp ... "
 	./$(TESTFILE).o
