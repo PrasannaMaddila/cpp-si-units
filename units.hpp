@@ -36,7 +36,7 @@ std::ostream& operator<< (std::ostream& out, const UnitTuple& utup){
     return out;
 }
 
-constexpr const UnitTuple operator+ (const UnitTuple left, const UnitTuple right){
+constexpr const UnitTuple operator+ (const UnitTuple& left, const UnitTuple& right){
     return UnitTuple{
         left.pow_meter       + right.pow_meter, 
         left.pow_second      + right.pow_second, 
@@ -48,7 +48,7 @@ constexpr const UnitTuple operator+ (const UnitTuple left, const UnitTuple right
     }; 
 }
 
-constexpr const UnitTuple operator- (const UnitTuple left, const UnitTuple right){
+constexpr const UnitTuple operator- (const UnitTuple& left, const UnitTuple& right){
         return UnitTuple{
             left.pow_meter       - right.pow_meter, 
             left.pow_second      - right.pow_second, 
@@ -66,30 +66,40 @@ class Unit {
         double value; 
         
         // ctors 
-        Unit(double _val) : value{_val} {}; 
+        explicit Unit(double _val) : value{_val} {}; 
 
         // operators 
-        Unit<utup> operator+ (Unit<utup>& other) const {
+        Unit<utup> operator+ (const Unit<utup>& other) const {
             return Unit<utup>(this->value + other.value); 
         } 
-        Unit<utup> operator- (Unit<utup>& other) const {
+        Unit<utup> operator- (const Unit<utup>& other) const {
             return Unit<utup>(this->value - other.value); 
         }
-
+       
+        // defining multiplication of Units
         template<UnitTuple o_utup>
-        Unit<utup+o_utup> operator* (Unit<o_utup> other) const {
+        Unit<utup+o_utup> operator* (const Unit<o_utup>& other) const {
             return Unit<utup+o_utup> (this->value * other.value); 
         }
-        
+        // and division of units
         template<UnitTuple o_utup>
-        Unit<utup-o_utup> operator/ (Unit<o_utup> other) const {
+        Unit<utup-o_utup> operator/ (const Unit<o_utup>& other) const {
             return Unit<utup-o_utup> (this->value / other.value); 
         }
+        
+        // then multiplication of constants 
+        Unit<utup> operator* (const double& constant) const {
+            return Unit<utup> (this->value * constant); 
+        }
 
+        // and division by constants 
+        Unit<utup> operator/ (const double& constant) const {
+            return Unit<utup> (this->value / constant); 
+        }
         // filling out the print screen        
         virtual void print(std::ostream& out) const {
             out << "Unit" << utup << this->value;  
-        }
+        }        
 }; 
 
 template<UnitTuple utup>

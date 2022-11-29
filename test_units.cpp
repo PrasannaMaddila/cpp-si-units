@@ -48,6 +48,41 @@ TEST(TestUnits, TestDivision){
     EXPECT_EQ(os.str(), "Unit< 0, 0, 0, 0, 0, 0, 0 >0.5");      
 }
 
+TEST(TestUnits, TestMultiplicationConstant){
+    Unit<meter> m(1.0);
+    m = m * 2;  
+    std::ostringstream os; 
+
+    os << m; 
+    EXPECT_EQ(os.str(), "Unit< 1, 0, 0, 0, 0, 0, 0 >2");      
+}
+
+TEST(TestUnits, TestDivisionConstant){
+    Unit<meter> m(1.0);
+    m = m / 2;  
+    std::ostringstream os; 
+
+    os << m; 
+    EXPECT_EQ(os.str(), "Unit< 1, 0, 0, 0, 0, 0, 0 >0.5");      
+}
+
+/*
+ * This test will not even compile, 
+ * which is expected behaviour.
+ */
+/*
+TEST(TestUnits, TestAdditionConstant){
+    Unit<meter> m(1.0);
+    std::ostringstream out; 
+    try{ 
+        m = m + 2;  
+    } catch (const auto& e) {
+        out << "Operation failed successfully."; 
+    }
+
+    EXPECT_EQ(os.str(), "Operation failed successfully.");
+}
+*/
 int main( int argc, char * argv[] )
 {
     ::testing::InitGoogleTest( &argc, argv );
