@@ -38,7 +38,7 @@ class Unit{
         // possible value of the other operand. 
         // This allows meter * meter^2 = meter^3. 
         template<int opow>
-        Unit<opow + pow> operator* (Unit<opow>& other){
+;       Unit<opow + pow> operator* (Unit<opow>& other){
             return Unit<opow + pow>(other.value * value);
         }
 
@@ -71,3 +71,4 @@ int main(){
     std::cout << umul << std::endl; 
     std::cout << udiv << std::endl; 
 }
+
