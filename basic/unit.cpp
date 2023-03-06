@@ -27,27 +27,27 @@ class Unit{
         Unit<pow> operator+ (Unit<pow>& other){
             return Unit<pow>(value + other.value); 
         }
-        
+
         // subtraction 
         Unit<pow> operator- (Unit<pow>& other){
             return Unit<pow>(value - other.value); 
         }
-        
+
         // then multiplication ... 
         // This needs to be templatized for each 
         // possible value of the other operand. 
         // This allows meter * meter^2 = meter^3. 
         template<int opow>
-;       Unit<opow + pow> operator* (Unit<opow>& other){
-            return Unit<opow + pow>(other.value * value);
-        }
+            Unit<opow + pow> operator* (Unit<opow>& other){
+                return Unit<opow + pow>(other.value * value);
+            }
 
         // and similarly division. 
         template<int opow>
-        Unit<pow - opow> operator/ (Unit<opow>& other){
-            return Unit<pow - opow> (value / other.value); 
-        }
-        
+            Unit<pow - opow> operator/ (Unit<opow>& other){
+                return Unit<pow - opow> (value / other.value); 
+            }
+
         // helper function to overload operator<<
         void print(std::ostream& out){
             out << "unit<" << pow << "> : value = " << value; 
